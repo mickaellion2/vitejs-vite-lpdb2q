@@ -13,8 +13,8 @@
         <th>Etape</th>
         <th></th>
       </tr>
-    </thead>
-    <tbody id="filtresFacturier">
+
+      <!--tbody id="filtresFacturier"-->
       <tr>
         <td id="premiereCaseTableauRecherche"></td>
         <td>
@@ -79,7 +79,8 @@
         </td>
         <td></td>
       </tr>
-    </tbody>
+    </thead>
+    <!--/tbody-->
     <tbody>
       <tr>
         <td colspan="10">
@@ -206,10 +207,13 @@ export default {
 
 <style scoped>
 #titreTableauFacturerNonSolde {
-  display: flex;
   background: var(--mauve-clair);
   height: 28px;
   box-shadow: 0px 5px 5px -3px;
+}
+
+#titreTableauFacturerNonSolde :last-child {
+  background: var(--mauve-clair);
 }
 
 .titreTableau h4 {

@@ -4,12 +4,12 @@
   <form class="formulaire">
     <fieldset class="titreFormulaireFacturier">
       <legend>
-          Formulaire Apprenti (<a
-            target="_blank"
-            href="https://www.formulaires.service-public.fr/gf/getNotice.do?cerfaNotice=51649&cerfaFormulaire=10103"
-            style="font-weight: bold"
-            >Aide</a
-          >)
+        Formulaire Apprenti (<a
+          target="_blank"
+          href="https://www.formulaires.service-public.fr/gf/getNotice.do?cerfaNotice=51649&cerfaFormulaire=10103"
+          style="font-weight: bold"
+          >Aide</a
+        >)
       </legend>
       <div class="detailApprenti">
         <div class="inputBoxFacturier">
@@ -734,7 +734,7 @@ export default {
   margin-bottom: 1px;
   margin-left: 1%;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 select {
@@ -743,9 +743,5 @@ select {
 
 option {
   data-width: 100%;
-}
-
-.formulaire {
-  width: 90%;
 }
 </style>
