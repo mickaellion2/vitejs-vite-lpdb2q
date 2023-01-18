@@ -167,7 +167,7 @@ export default {
   padding: 10px;
 }*/
 
-.detailMaitre {
+.detailOpco {
   width: 90%;
   max-width: content-box;
   border-radius: 5px;
@@ -177,9 +177,16 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 0.2rem 0.5rem;
   box-shadow: 0px 5px 5px -5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.detailMaitreMineur {
+.detailFacturier {
+  flex-basis: 50%;
+}
+
+.detailOpcoMineur {
   width: 90%;
   max-width: content-box;
   border-radius: 5px;
@@ -189,6 +196,9 @@ export default {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 0.2rem 0.5rem;
   box-shadow: 0px 5px 5px -5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .etudiantMineur {
@@ -197,7 +207,7 @@ export default {
   align-items: flex-start;
 }
 
-.detailMaitreMineur .etudiantMineur div {
+.detailOpcoMineur .etudiantMineur div {
   margin: auto;
 }
 
@@ -218,13 +228,8 @@ export default {
   margin-right: auto;
 }
 
-/*.detailMaitre div:last-child{
+/*.detailOpco div:last-child{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }*/
 </style>
-
-/* Suggestions : -prévoir d'utiliser une API pour rentrer des données
-géographiques -prévoir d'utiliser une API pour rentrer des données d'entreprise
--faire une validation des données afin de vérifier quelles sont bien dans le bon
-format */

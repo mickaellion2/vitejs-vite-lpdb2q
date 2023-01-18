@@ -2,7 +2,7 @@
   <table id="tableaufacture">
     <thead id="titreTableauFacturerNonSolde">
       <tr>
-        <th>N°</th>
+        <th>N° dossier</th>
         <th>Apprenti</th>
         <th>Section</th>
         <th>Employeur</th>
@@ -58,7 +58,17 @@
           ></BoutonBase>
           <!--bouton-base @click="formMaitre = true" class="BoutonBaseRecherche" id="BoutonBaseRechercheMaitre" :intituleBouton="this.$data.nomBoutonMaitre" v-on:click="this.ajouterUnMaitre"></bouton-base-->
         </td>
-        <td></td>
+        <td>
+          <select>
+            <option>Choisir</option>
+          </select>
+          <BoutonBase
+            class="BtnAfficheFormulaire"
+            :etatBouton="etatFormulaire == 'contrat'"
+            :type="typeBtnAfficherFormulaire"
+            @click="changeEtatBoutonFormulaire('contrat')"
+          ></BoutonBase>
+        </td>
         <td>
           <select>
             <option>Choisir</option>
@@ -77,7 +87,6 @@
             <option>en cours</option>
           </select>
         </td>
-        <td></td>
       </tr>
     </thead>
     <!--/tbody-->
@@ -98,6 +107,24 @@
               id="formApprenti"
             >
             </FormulaireApprenti>
+            <FormulaireEmployeur
+              v-if="etatFormulaire == 'employeur'"
+              v-on:remetEtatInitial="this.remetEtatInitial"
+              id="formEmployeur"
+            >
+            </FormulaireEmployeur>
+            <FormulaireMaitre
+              v-if="etatFormulaire == 'maitre'"
+              v-on:remetEtatInitial="this.remetEtatInitial"
+              id="formMaitre"
+            >
+            </FormulaireMaitre>
+            <FormulaireContrat
+              v-if="etatFormulaire == 'contrat'"
+              v-on:remetEtatInitial="this.remetEtatInitial"
+              id="formContrat"
+            >
+            </FormulaireContrat>
           </form>
 
           <div class="boutonCreationDossier">
@@ -120,9 +147,9 @@ import BoutonBase from '@/components/Controler/elementsHTML/bouton/BoutonBase.vu
 import elementContratTableauFacturier from '@/components/Controler/backOffice/elementContratTableauFacturier.vue';
 import FormulaireApprenti from '@/components/Controler/backOffice/FormulaireApprenti.vue';
 import FormulaireOpco from '@/components/Controler/backOffice/FormulaireOpco.vue';
-import formulaireEmployeur from '@/components/Controler/backOffice/formulaireEmployeur.vue';
-import formulaireMaitre from '@/components/Controler/backOffice/formulaireMaitre.vue';
-//import formulaireContrat from "@/components/Controler/backOffice/formulaireContrat.vue";
+import FormulaireEmployeur from '@/components/Controler/backOffice/formulaireEmployeur.vue';
+import FormulaireMaitre from '@/components/Controler/backOffice/formulaireMaitre.vue';
+import FormulaireContrat from '@/components/Controler/backOffice/formulaireContrat.vue';
 import construitURLService from '@/services/construitURL.service.vue';
 import configuration from '@/administration/configuration.vue';
 
@@ -132,6 +159,9 @@ export default {
     BoutonBase,
     FormulaireOpco,
     FormulaireApprenti,
+    FormulaireEmployeur,
+    FormulaireMaitre,
+    FormulaireContrat,
     elementContratTableauFacturier,
   },
   data() {
@@ -212,93 +242,11 @@ export default {
   box-shadow: 0px 5px 5px -3px;
 }
 
-#titreTableauFacturerNonSolde :last-child {
-  background: var(--mauve-clair);
-}
-
 .titreTableau h4 {
   font-weight: 300;
   font-size: 1rem;
   color: white;
   text-align: center;
-}
-
-#numeroTitreFacturier {
-  width: 3%;
-  min-width: 30px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 0 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(2) {
-  background: var(--color-dark);
-  width: 18%;
-  min-width: 150px;
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(3) {
-  width: 5%;
-  min-width: 60px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-#titreTableauFacturerNonSolde :nth-child(4) {
-  width: 18%;
-  min-width: 100px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(5) {
-  width: 6%;
-  min-width: 60px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(6) {
-  width: 8%;
-  min-width: 70px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(7) {
-  width: 8%;
-  min-width: 70px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(8) {
-  width: 8%;
-  min-width: 98px;
-  background: var(--color-dark);
-  margin-right: 1px;
-  border-radius: 6px 0 6px 0;
-}
-
-#titreTableauFacturerNonSolde :nth-child(9) {
-  width: 25%;
-  min-width: 150px;
-  background: var(--color-dark);
-  border-radius: 6px 0 0 0;
-}
-
-#titreTableauDerniereCase {
-  width: 15%;
-  min-width: 130px;
-  background: var(--color-dark);
-  background: var(--color-dark);
-  height: 28px;
 }
 
 /* Valeur height a changer dynamiquement pour englober les formulaires*/
@@ -318,54 +266,45 @@ export default {
 
 #filtresFacturier :nth-child(2) {
   padding: 0px;
-  width: 18%;
   min-width: 150px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(3) {
-  width: 5%;
   min-width: 60px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(4) {
-  width: 18%;
   min-width: 100px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(5) {
-  width: 6%;
   min-width: 60px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(6) {
-  width: 8%;
   min-width: 70px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(7) {
-  width: 8%;
   min-width: 70px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(8) {
-  width: 8%;
   min-width: 98px;
   margin-right: 1px;
 }
 
 #filtresFacturier :nth-child(9) {
-  width: 25%;
   min-width: 150px;
 }
 
 #filtresFacturier :nth-child(10) {
-  width: 15%;
   min-width: 130px;
 }
 
@@ -457,5 +396,34 @@ select {
 
 .detailApprenti select {
   width: 50%;
+}
+
+.boutonCreationDossier {
+  display: flex;
+  justify-content: center;
+}
+
+thead {
+  height: 28px;
+  box-shadow: 0px 5px 5px -3px;
+  text-align: center;
+}
+
+thead:first-child {
+  margin-right: 1px;
+  border-radius: 6px 0 6px 0;
+}
+thead th {
+  background: var(--color-dark);
+  color: var(--mauve-clair);
+}
+
+thead tr {
+  background: var(--mauve-clair);
+  text-align: center;
+}
+
+thead tr td:last-child {
+  display: flex;
 }
 </style>
